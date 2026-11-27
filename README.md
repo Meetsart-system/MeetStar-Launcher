@@ -8,7 +8,7 @@ MeetStar 桌面启动器 —— WinForms + WebView2 混合架构：C# 壳提供�
 |---|---|
 | 宿主壳 | C# / .NET 10.0-windows / WinForms |
 | WebView | Microsoft.Web.WebView2 |
-| 前端 | Vue 3 + TypeScript + Vite（独立仓库，以 git 子模块接入 `frontend/`） |
+| 前端 | Vue 3 + TypeScript + Vite + miuix-vue（独立仓库，以 git 子模块接入 `frontend/`） |
 | 通信 | `AddHostObjectToScript`（C# ↔ JS 桥接） |
 
 ## 仓库结构
@@ -34,6 +34,9 @@ MeetStar-Launcher/                  ← 主仓（Backend 直管）
 ```bash
 git clone --recursive https://github.com/Meetsart-system/MeetStar-Launcher.git
 dotnet build MeetStar-Launcher.slnx
+
+# 前端开发（包管理器：pnpm）
+cd frontend && pnpm install && pnpm dev   # http://localhost:5173
 ```
 
 ### 接入前端子模块（创建 MeetStar-UI 仓库后）
