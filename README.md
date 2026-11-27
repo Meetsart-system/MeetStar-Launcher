@@ -32,7 +32,7 @@ MeetStar-Launcher/                  ← 主仓（Backend 直管）
 ## 开发
 
 ```bash
-git clone --recursive https://github.com/Meetsart-system/MeetStar-Launcher.git
+git clone --recursive https://github.com/MeetStar-System/MeetStar-Launcher.git
 dotnet build MeetStar-Launcher.slnx
 
 # 前端开发（包管理器：pnpm）
