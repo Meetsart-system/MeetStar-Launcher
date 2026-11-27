@@ -1,0 +1,39 @@
+# 行尾与二进制规范
+* text=auto
+
+# 文本文件统一 LF 入库，Windows 侧按需检出
+*.cs       text
+*.slnx     text
+*.csproj   text
+*.props    text
+*.resx     text
+*.md       text
+*.yml      text
+*.yaml     text
+*.json     text
+*.ts       text
+*.tsx      text
+*.vue      text
+*.js       text
+*.mjs      text
+*.html     text
+*.css      text
+*.scss     text
+*.editorconfig text
+*.gitignore    text
+*.gitattributes text
+
+# Windows 脚本必须 CRLF
+*.cmd  text eol=crlf
+*.bat  text eol=crlf
+*.ps1  text eol=crlf
+
+# 二进制
+*.png  binary
+*.jpg  binary
+*.ico  binary
+*.ttf  binary
+*.woff binary
+*.woff2 binary
+*.dll  binary
+*.exe  binary
