@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  guard:
+    name: Submodule pointer guard
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # frontend/ 为 git 子模块：构建前校验指针已初始化，
+      # 并检查是否落后于远程默认分支（落后仅告警，不阻断）
+      - name: Check frontend submodule
+        run: |
+          if [ -f .gitmodules ] && grep -q 'path = frontend' .gitmodules; then
+            if ! [ -d frontend/.git ]; then
+              echo "::error::frontend 子模块未初始化（主仓指针漂移）"
+              exit 1
+            fi
+            LOCAL=$(git submodule status frontend | awk '{print $1}' | tr -d '+-U ')
+            REMOTE=$(git ls-remote origin frontend 2>/dev/null | head -c 40 || true)
+            if [ -n "$REMOTE" ] && [ "$LOCAL" != "$REMOTE" ]; then
+              echo "::warning::frontend 子模块指针($LOCAL)落后于远程默认分支($REMOTE)"
+            fi
+          else
+            echo "frontend 子模块尚未接入，跳过校验"
+          fi
+
+  build:
+    name: Build backend (WinForms)
+    needs: guard
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore
+        run: dotnet restore MeetStar-Launcher.slnx
+
+      - name: Build
+        run: dotnet build MeetStar-Launcher.slnx -c Release --no-restore

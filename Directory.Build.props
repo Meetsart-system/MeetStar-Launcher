@@ -1,0 +1,13 @@
+<Project>
+
+  <!-- 所有 C# 项目共享的分析器与编译设置 -->
+  <PropertyGroup>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <!-- 确定性构建，便于 CI 缓存与产物校验 -->
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+
+</Project>

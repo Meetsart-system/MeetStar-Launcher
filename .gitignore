@@ -1,0 +1,29 @@
+# Visual Studio 本地缓存
+.vs/
+
+# WorkBuddy 本地工作数据（记忆、临时文件，含解包缓存）
+.workbuddy/
+
+# .NET build output
+bin/
+obj/
+out/
+publish/
+
+# Visual Studio / Rider 用户文件
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Node / frontend
+node_modules/
+frontend/dist/
+*.local
+
+# NuGet
+*.nupkg
+
+# OS files
+Thumbs.db
+.DS_Store
