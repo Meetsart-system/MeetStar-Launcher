@@ -23,6 +23,12 @@ public class LauncherBridge
 
     private readonly ConfigService _configService = new();
     private readonly AppLauncherService _launcherService = new();
+    private readonly IWindowController _window;
+
+    public LauncherBridge(IWindowController window)
+    {
+        _window = window;
+    }
 
     /// <summary>获取应用列表（JSON 字符串，camelCase）。</summary>
     public string LoadAppsJson()
@@ -55,4 +61,13 @@ public class LauncherBridge
         var path = _configService.ConfigFilePathForDisplay();
         System.Diagnostics.Process.Start("explorer.exe", $"/select,\"{path}\"");
     }
+
+    /// <summary>最小化窗口。</summary>
+    public void MinimizeWindow() => _window.MinimizeWindow();
+
+    /// <summary>切换最大化/还原，返回切换后的状态（"maximized" 或 "normal"）。</summary>
+    public string ToggleMaximizeWindow() => _window.ToggleMaximizeWindow();
+
+    /// <summary>关闭窗口。</summary>
+    public void CloseWindow() => _window.CloseWindow();
 }

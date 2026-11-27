@@ -30,6 +30,15 @@ JSON 一律 **camelCase**（C# 侧 `JsonNamingPolicy.CamelCase` 保证）。
 | `SaveAppsJson(json)` | `LauncherApp[]` 的 JSON 字符串 | void | JSON 无效抛 `ArgumentException` |
 | `LaunchApp(name)` | 应用名 | void | 应用不存在 / 可执行文件缺失抛异常 |
 | `OpenConfigFolder()` | — | void | — |
+| `MinimizeWindow()` | — | void | — |
+| `ToggleMaximizeWindow()` | — | `string`：`"maximized"` 或 `"normal"` | — |
+| `CloseWindow()` | — | void | — |
+
+## 窗口形态
+
+- 无边框窗体：宿主用 `WM_NCCALCSIZE` 剥离原生标题栏，保留 `WS_THICKFRAME`（贴靠/缩放由 DWM 提供）
+- WebView2 `IsNonClientRegionSupportEnabled = true`：前端标题栏容器使用 CSS `app-region: drag`，
+  窗口控制按钮区域使用 `app-region: no-drag`；双击标题栏最大化由 WebView2 自动映射
 
 ## 配置存储
 

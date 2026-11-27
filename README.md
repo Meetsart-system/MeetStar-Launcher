@@ -51,6 +51,23 @@ git submodule add https://github.com/Meetsart-system/MeetStar-UI.git frontend
 2. 回主仓：`git submodule update --remote frontend`
 3. 主仓提交指针变更，触发整包构建
 
+## 构建与发布
+
+```bash
+# 一键发布：前端构建 → dotnet publish → out/publish/MeetStar-Launcher.Backend.exe
+powershell -File scripts/build.ps1
+powershell -File scripts/build.ps1 -SelfContained   # 自包含（内置 .NET 运行时）
+
+# 开发：一键起 Vite 开发服务器 + Debug 宿主
+powershell -File scripts/dev.ps1
+```
+
+## 窗口形态
+
+无边框窗口：原生标题栏由宿主剥离（`WM_NCCALCSIZE`），标题栏由前端绘制，
+拖拽区域通过 WebView2 非客户区支持（CSS `app-region: drag`）实现，
+窗口缩放与系统贴靠仍由 DWM 提供。窗口控制按钮经桥接调用宿主。
+
 ## 约定
 
 - 提交信息遵循 Conventional Commits（`feat:` / `fix:` / `chore:` / `docs:` …）
